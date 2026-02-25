@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trav-In Hotel Website
 
-## Getting Started
+Premium, conversion-focused hotel website built with:
 
-First, run the development server:
+- Next.js App Router
+- React 18 + TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+- React Hook Form + Zod
+
+## Install and Run
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build and Lint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```txt
+app/
+  (site)/
+    page.tsx
+    rooms/page.tsx
+    rooms/[slug]/page.tsx
+    amenities/page.tsx
+    booking/page.tsx
+    contact/page.tsx
+    gallery/page.tsx
+    offers/page.tsx
+    about/page.tsx
+  api/inquiries/route.ts
+components/
+data/
+lib/
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Where to Edit Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Room rates and room content: `data/rooms.ts`
+- Amenities: `data/amenities.ts`
+- Testimonials: `data/testimonials.ts`
+- FAQ items: `data/faqs.ts`
+- Offers/promos: `data/offers.ts`
+- Gallery photos: `data/gallery.ts`
+- Hotel contact/location/map settings: `lib/site-config.ts`
 
-## Deploy on Vercel
+## Replacing Images
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Sample images currently use remote Unsplash URLs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Update URLs in:
+
+- `data/rooms.ts`
+- `data/amenities.ts`
+- `data/gallery.ts`
+- `data/offers.ts`
+- `app/(site)/page.tsx` (hero and map preview image)
+- `app/(site)/about/page.tsx`
+
+If you switch to another image domain/provider, add it in `next.config.mjs` under `images.remotePatterns`.
+
+## Booking Inquiry Flow
+
+- Multi-step form: `components/forms/booking-form.tsx`
+- Validation schema: `lib/schemas.ts` (`bookingInquirySchema`)
+- API route handler: `app/api/inquiries/route.ts`
+- In-memory mock storage: `lib/inquiries-store.ts`
+
+Notes:
+
+- Inquiries are stored in memory only and reset when the server restarts.
+- A pre-filled WhatsApp link is shown after successful submission.
+
+## Contact and Map
+
+- Contact page: `app/(site)/contact/page.tsx`
+- Contact form validation: `lib/schemas.ts` (`contactSchema`)
+- Google map embed and directions URL: `lib/site-config.ts`
+
+## Design and Styling
+
+- Global theme + utilities: `app/globals.css`
+- Tailwind theme extensions: `tailwind.config.ts`
+- Shared layout/navigation/footer: `components/layout/*`
+
+## Notes
+
+- Fully responsive on mobile, tablet, and desktop.
+- Metadata and OpenGraph are included for SEO readiness.
+- Framer Motion powers section reveals and page transitions.
